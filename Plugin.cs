@@ -84,7 +84,7 @@ namespace ConnectionLog
     //    }
     //}
 
-    [OTAVersion(1, 1)]
+    [OTAVersion(1, 0)]
     public class Plugin : BasePlugin
     {
         public Plugin()
@@ -129,13 +129,13 @@ namespace ConnectionLog
                     (
                          "SELECT * " +
                         $"FROM {TableMapper.TypeToName<LogItem>()} a " +
-                         "where ( " +
+                         "where cast(( " +
                             $"SELECT COUNT(b.{ColumnMapper.Enclose("Id")}) " +
                             $"FROM {TableMapper.TypeToName<LogItem>()} b " +
                             $"where b.{ColumnMapper.Enclose("Id")} < a.{ColumnMapper.Enclose("Id")} " +
-                        $") / {MaxChatLines} = ({page} - 1) " +
-                        $"order by a.{ColumnMapper.Enclose("DateAdded")} desc " +
-                        $"limit {MaxChatLines}"
+                        $") / {MaxChatLines} as int) = ({page} - 1) " +
+                        $"order by a.{ColumnMapper.Enclose("DateAdded")} desc",
+                        transaction: txn
                     );
 
                     if (res != null)
