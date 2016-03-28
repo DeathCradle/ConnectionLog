@@ -114,9 +114,19 @@ namespace ConnectionLog
 
         void Cmd_ConnectionLog_List(ISender sender, ArgumentList args)
         {
+            if(!OTA.Data.DatabaseFactory.Available)
+            {
+                sender.Message(255, Color.Red, "No database available.");
+                return;
+            }
+
             int page = 0;
             args.TryPopAny("-page", out page);
 
+            if(page == 0 && args.Count == 1)
+            {
+                if (!args.TryGetInt(0, out page)) page = 1;
+            }
             if (page < 1) page = 1;
 
             using (var db = OTA.Data.DatabaseFactory.CreateConnection())
@@ -124,7 +134,7 @@ namespace ConnectionLog
                 using (var txn = db.BeginTransaction())
                 {
                     // TODO: pagination info
-                    const Int32 MaxChatLines = 5;
+                    const Int32 MaxChatLines = 9;
                     var res = db.Query<LogItem>
                     (
                          "SELECT * " +

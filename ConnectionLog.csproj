@@ -43,11 +43,13 @@
     <Reference Include="FluentMigrator.Runner">
       <HintPath>..\..\Open-Terraria-API\Binaries\Libraries\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="OTA">
-      <HintPath>..\..\Open-Terraria-API\Binaries\Server\OTA.dll</HintPath>
+    <Reference Include="OTA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Open-Terraria-API\Binaries\Server\OTA.dll</HintPath>
     </Reference>
-    <Reference Include="OTA.Commands">
-      <HintPath>..\..\Open-Terraria-API\Binaries\Server\OTA.Commands.dll</HintPath>
+    <Reference Include="OTA.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Open-Terraria-API\Binaries\Server\OTA.Commands.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
